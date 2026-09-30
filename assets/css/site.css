@@ -1,33 +1,38 @@
 /* ============================================================
-   RetentionMath - design system
-   Warm paper, deep navy, gold. Playfair Display + Lato.
+   RetentionMath - design system, SIGNAL variant
+   White, ink, one cobalt accent. Space Grotesk + Inter + JetBrains Mono.
+   The base rules below are the original theme; the Signal layer at the end restyles them.
    ============================================================ */
 
 :root{
-  --paper:      #FAF8F5;
-  --paper-2:    #F2EFE9;
+  /* SIGNAL palette. Token names are kept from the original theme so that every rule and
+     inline style still resolves: "navy" is now the dark ink panel, "gold" is now cobalt. */
+  --paper:      #FFFFFF;
+  --paper-2:    #F4F6FA;
   --white:      #FFFFFF;
-  --navy:       #16263F;
-  --navy-2:     #1D3049;
-  --navy-line:  #2E3F58;
-  --ink:        #16263F;
-  --ink-2:      #4A5A70;
-  --ink-3:      #7A8798;
-  --on-navy:    #C4CCD8;
-  --on-navy-2:  #97A3B4;
-  --gold:       #C09A3E;
-  --gold-deep:  #96731F;
-  --gold-light: #D9B75F;
-  --gold-soft:  #D8C79B;
-  --line:       #E4DED2;
-  --line-soft:  #EDE7DC;
+  --navy:       #0B1220;
+  --navy-2:     #141D30;
+  --navy-line:  #26324A;
+  --ink:        #0B1220;
+  --ink-2:      #4A5468;
+  --ink-3:      #7C879C;
+  --on-navy:    #C3CBDA;
+  --on-navy-2:  #8E99AE;
+  --gold:       #2F5BFF;
+  --gold-deep:  #1E44D8;
+  --gold-light: #8CA4FF;
+  --gold-soft:  #C9D4FF;
+  --blue-soft:  #E8EEFF;
+  --line:       #E2E7F0;
+  --line-soft:  #EDF1F6;
 
-  --font-display:"Playfair Display",Georgia,"Times New Roman",serif;
-  --font-body:"Lato","Segoe UI","Helvetica Neue",Arial,sans-serif;
+  --font-display:"Space Grotesk","Segoe UI",Arial,sans-serif;
+  --font-body:"Inter","Segoe UI","Helvetica Neue",Arial,sans-serif;
+  --font-mono:"JetBrains Mono",Consolas,monospace;
 
   --wrap: 1180px;
   --gut: 40px;
-  --r: 0px;
+  --r: 14px;
 }
 
 *,*::before,*::after{box-sizing:border-box}
@@ -656,3 +661,171 @@ em,.it{font-style:italic}
 .cell ul li a:hover .arrow{transform:translateX(3px)}
 .testi-row--2{grid-template-columns:1fr 1fr;gap:56px 64px}
 @media (max-width:900px){.testi-row--2{grid-template-columns:1fr;gap:48px}}
+
+/* ============================================================
+   SIGNAL LAYER
+   Everything below restyles the original components. It changes no content and no
+   order: rounded surfaces, pill buttons, KPI tiles, mono labels, cobalt accent,
+   dark "console" panels for the navy blocks and the standalone quotes.
+   ============================================================ */
+@media (max-width:640px){:root{--gut:20px}}
+
+body{font-size:16.5px;line-height:1.68}
+h1,h2,h3,h4{font-weight:600;letter-spacing:-.03em;line-height:1.1}
+h1{letter-spacing:-.04em;line-height:1.02}
+h3{letter-spacing:-.02em;line-height:1.25}
+em,.it{font-style:normal}
+.hl{font-style:normal;background:linear-gradient(90deg,var(--gold),#6E8BFF);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* mono micro-labels replace the letter-spaced caps */
+.eyebrow,.expstrip__l,.cell__k,.trig__h,.deliver__h,.flag__meta dt,.tl__role,.post__m,.post__go,
+.field label,.ftr h4,.idx__band-k,.idx__get-h,.idx__for,.idx__side dt,.endorse__h,.portrait figcaption{
+  font-family:var(--font-mono);font-weight:500;letter-spacing:.04em;text-transform:uppercase;
+}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;font-size:.74rem;line-height:1.4;color:var(--gold-deep);
+  background:var(--blue-soft);padding:8px 13px;border-radius:999px;margin-bottom:26px;
+}
+.eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--gold);flex:none}
+.section--navy .eyebrow{background:rgba(47,91,255,.18);color:var(--gold-light)}
+
+/* the rule-and-diamond motif becomes a short cobalt signal bar */
+.rule{max-width:none;margin:30px 0 28px;gap:0}
+.rule::before,.rule::after{display:none}
+.rule i{width:44px;height:4px;border-radius:99px;clip-path:none;background:linear-gradient(90deg,var(--gold),#6E8BFF)}
+.rule--center{justify-content:center}
+
+/* buttons: pills, sentence case */
+.btn{border-radius:999px;text-transform:none;letter-spacing:0;font-size:.95rem;font-weight:600;padding:15px 24px}
+.btn--sm{padding:11px 18px;font-size:.88rem}
+.btn--primary{background:var(--gold);border-color:var(--gold);color:#fff}
+.btn--primary:hover{background:var(--gold-deep);border-color:var(--gold-deep);color:#fff}
+.btn--ghost{background:var(--paper-2);border-color:var(--paper-2);color:var(--ink)}
+.btn--ghost:hover{background:var(--line);border-color:var(--line);color:var(--ink)}
+.tlink{text-transform:none;letter-spacing:0;font-size:.95rem;font-weight:600;color:var(--gold)}
+.section--navy .btn--primary,.flag .btn--primary{background:var(--gold);border-color:var(--gold);color:#fff}
+.section--navy .btn--primary:hover,.flag .btn--primary:hover{background:#fff;border-color:#fff;color:var(--ink)}
+.section--navy .btn--ghost{background:rgba(255,255,255,.08);border-color:transparent;color:#fff}
+
+/* header */
+.hdr{background:rgba(255,255,255,.88);border-bottom-color:var(--line)}
+.hdr__in{height:74px}
+.nav a{text-transform:none;letter-spacing:0;font-size:.93rem;font-weight:500}
+.nav a[aria-current="page"]{color:var(--gold-deep)}
+.nav a[aria-current="page"]::after{height:2px;border-radius:2px;bottom:-4px}
+.burger{border-radius:10px}
+@media (max-width:880px){.nav{inset:74px 0 auto 0}}
+
+/* hero: soft cobalt glow instead of the brand arcs */
+.hero{background:radial-gradient(900px 460px at 88% -8%,var(--blue-soft),transparent 70%)}
+.gridlines{display:none}
+
+/* portrait as a product card */
+.portrait::before{display:none}
+.portrait img{border:0;border-radius:22px;box-shadow:0 34px 60px -32px rgba(11,18,32,.5)}
+.portrait figcaption{
+  display:inline-block;margin-top:-22px;margin-left:18px;padding:10px 14px;border-radius:12px;
+  background:var(--ink);color:#AEB7C9;font-size:.72rem;line-height:1.5;box-shadow:0 14px 30px -16px rgba(11,18,32,.6);
+}
+.portrait figcaption b{color:#fff;font-weight:500}
+
+/* stats become KPI tiles */
+.stats{background:none;border:0;gap:14px;padding:4px 0}
+.stat{background:var(--paper-2);border:0!important;border-radius:var(--r);padding:24px 22px 22px;display:flex;flex-direction:column}
+.stat__n{font-weight:600;letter-spacing:-.04em;font-size:clamp(2rem,3vw,2.5rem)}
+.stat__n .u{font-style:normal;color:var(--ink-3);font-size:.42em;font-weight:500;letter-spacing:0;margin-left:4px}
+.stat__l{margin-top:12px;color:var(--ink-2);font-size:.86rem;flex:1}
+.stat::after{content:"";height:6px;border-radius:99px;margin-top:16px;background:linear-gradient(90deg,var(--gold) 0 var(--fill,70%),var(--line) var(--fill,70%))}
+.stat:nth-child(1){--fill:82%}.stat:nth-child(2){--fill:42%}.stat:nth-child(3){--fill:100%}.stat:nth-child(4){--fill:60%}.stat:nth-child(5){--fill:90%}
+
+/* experience strip */
+.expstrip__l{font-size:.74rem;color:var(--ink-3)}
+.expstrip__row span{font-family:var(--font-display);font-weight:600;letter-spacing:-.02em;color:var(--ink-3)}
+.expstrip__row span:not(:last-child)::after{clip-path:none;border-radius:50%;background:var(--line);width:5px;height:5px}
+
+/* cards */
+.cell{border-radius:18px;padding:32px 30px;transition:border-color .15s ease,box-shadow .15s ease}
+.cell:hover{border-color:var(--gold-soft);box-shadow:0 22px 44px -30px rgba(47,91,255,.55)}
+.cell__n{font-family:var(--font-mono);font-style:normal;font-size:.8rem;font-weight:500;color:var(--gold-deep);
+  width:40px;height:40px;border-radius:12px;background:var(--blue-soft);display:grid;place-items:center;margin-bottom:18px}
+.cell__k{font-size:.72rem;color:var(--ink-3);margin-bottom:10px}
+.cell ul{border-top:0;padding-top:0;display:grid;gap:8px}
+.cell ul li{padding:0}
+.cell ul li a{display:flex;justify-content:space-between;align-items:center;background:var(--paper-2);padding:12px 14px;border-radius:10px;border:0;color:var(--ink);font-weight:500;font-size:.92rem}
+.cell ul li a:hover{background:var(--blue-soft);color:var(--gold-deep)}
+.section--navy .cell{border-radius:18px}
+
+/* dark panels: the POV band and the flagship */
+.section--navy{background:var(--navy) radial-gradient(700px 380px at 100% 0%,rgba(47,91,255,.35),transparent 70%)}
+.section--navy .pov p{color:#fff}
+.flag{border-radius:24px;overflow:hidden;position:relative;background:var(--navy) radial-gradient(520px 320px at 100% 0%,rgba(47,91,255,.4),transparent 70%)}
+.flag__tag{border-radius:999px;font-family:var(--font-mono);font-weight:500;letter-spacing:.04em;background:rgba(47,91,255,.2);border-color:transparent;color:var(--gold-light)}
+.flag__meta dd{font-weight:600;letter-spacing:-.02em}
+.deliver li::before{clip-path:none;border-radius:3px;width:8px;height:8px;top:22px}
+
+/* bullets: diamonds become small cobalt dots */
+.prose ul li::before,.trig li::before{clip-path:none;border-radius:50%;width:7px;height:7px}
+.trig{border-radius:var(--r);overflow:hidden}
+
+/* pull quotes lose the italic */
+.pov{border-left-width:3px;border-radius:2px}
+.pov p{font-style:normal;font-weight:500;letter-spacing:-.015em}
+
+/* surfaces */
+.aside-note,.post,.idx__side,.form__status,.field input,.field select,.field textarea{border-radius:var(--r)}
+.aside-note{background:var(--paper-2);border-color:transparent}
+.fig img,.side__shot img,.shot img{border:0;border-radius:18px}
+.fig figcaption{border-left:0;padding-left:0;font-family:var(--font-mono);font-size:.74rem}
+.post{border-radius:18px}
+.post:hover{border-color:var(--gold-soft);box-shadow:0 22px 44px -30px rgba(47,91,255,.55)}
+.post__go{color:var(--gold)}
+.cta{background:var(--paper-2);border-top:0}
+.cal{border-radius:18px;overflow:hidden}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--gold);box-shadow:0 0 0 4px var(--blue-soft)}
+
+/* timeline */
+.tl__co{font-weight:600;letter-spacing:-.02em}
+.tl__role{font-size:.72rem;color:var(--gold-deep)}
+.tl__when{font-family:var(--font-mono);font-weight:500;letter-spacing:0}
+
+/* services offer index */
+.index{border-radius:20px;overflow:hidden}
+.idx__band{background:var(--paper-2)}
+.idx__band-n,.lane__n{font-family:var(--font-mono);font-style:normal;font-size:.8rem;color:var(--gold-deep);
+  background:var(--blue-soft);padding:5px 8px;border-radius:8px;line-height:1}
+.idx__btn:hover{background:#FAFBFE}
+.idx__name{font-weight:600;letter-spacing:-.02em}
+.idx__tag{font-family:var(--font-mono);font-weight:500;letter-spacing:.04em;border-radius:999px;border:0;background:var(--blue-soft);color:var(--gold-deep);padding:4px 9px}
+.idx__tog{border-radius:50%;background:var(--paper-2);border-color:transparent}
+.idx__btn:hover .idx__tog{background:var(--blue-soft);border-color:transparent}
+.idx__get li::before{height:2px;border-radius:2px}
+.idx__side dd{font-weight:600;letter-spacing:-.02em}
+.idx__item--navy .idx__body{background:var(--navy) radial-gradient(520px 300px at 100% 0%,rgba(47,91,255,.35),transparent 70%)}
+.idx__item--navy .idx__side{border-radius:var(--r)}
+.idx__item--navy .idx__side .btn--primary,.idx__item--navy .idx__side .btn--ghost{background:var(--gold);border-color:var(--gold);color:#fff}
+.idx__item--navy .idx__side .btn--primary:hover,.idx__item--navy .idx__side .btn--ghost:hover{background:#fff;border-color:#fff;color:var(--ink)}
+
+/* testimonials: a standalone quote is a dark console card; quotes in the
+   home pair and the About row stay light */
+.testi{background:var(--navy) radial-gradient(420px 300px at 100% 0%,rgba(47,91,255,.45),transparent 70%);
+  color:#E7ECF5;border-radius:24px;padding:48px 52px;text-align:left;max-width:900px;overflow:hidden}
+.testi .rule{margin:0 0 26px}
+.testi blockquote p{font-family:var(--font-display);font-style:normal;font-weight:500;letter-spacing:-.015em;color:#fff;font-size:clamp(1.2rem,2vw,1.5rem);line-height:1.45}
+.testi figcaption{color:#AEB7C9}
+.testi figcaption b{color:#fff;font-weight:600}
+@media (max-width:640px){.testi{padding:32px 24px;border-radius:20px}}
+
+.testi-pair .testi,.testi-row .testi{background:var(--paper-2);color:var(--ink);padding:32px 30px;border-radius:20px}
+.testi-pair .testi blockquote p,.testi-row .testi blockquote p{color:var(--ink);font-weight:500}
+.testi-pair .testi figcaption,.testi-row .testi figcaption{color:var(--ink-2)}
+.testi-pair .testi figcaption b,.testi-row .testi figcaption b{color:var(--ink)}
+.testi-pair{gap:16px}
+.testi-row,.testi-row--2{gap:16px}
+.endorse{border-top:0;padding-top:0}
+.endorse__h{font-size:.74rem;color:var(--ink-3)}
+
+/* footer */
+.ftr{background:var(--paper-2);border-top:0}
+.ftr h4{color:var(--ink-3);font-size:.72rem}
+.ftr ul a:hover{color:var(--gold)}
+.skip:focus{border-radius:10px}
